@@ -1,30 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, inicial-scale=1.0">
-  <title>Bruno Morita</title>
-  <style>
-    .center-text {
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruno Morita</title>
+
+    <style>
+        #MatrixRain{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: black;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
 </head>
-<body class="center-text" style="background-color: black;">
-  <h1 style="color: green;">Bruno Morita</h1>
-  <a href="index.html">English</a>
-  <a href="jpn.html">Japanese</a>
-  <p style="color: greenyellow;">I'm a polyglot, programmer and musician.</p>
-  <a href="web/">Game I made as a test for Game boy.</a><br>
-  <p style="color: greenyellow;">Music</p>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/qQFXJrrJONM?si=YgOLa44vjtVsI9iF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br>
-  <p style="color: greenyellow;">Animation</p>
-  <img src="vampire.gif" alt="vampire">
-  <p style="color: brown;">Social Media</p>
-  <a href="https://www.instagram.com/bruno_011235/">Instagram</a>
-  <a href="https://www.youtube.com/@bruno_11235">YouTube</a>
-  <a href="https://brunomorita.itch.io/">Itch.io</a>
-  <a href="https://www.linkedin.com/in/bruno-morita-127877402/">LinkedIn</a>
-  <a href="https://github.com/BrunoDevLogs">GitHub</a>
+<body>
+    <canvas id="MatrixRain" width="900" height="600"></canvas>
+
+    <script>
+        const squareSize = 20; 
+        const canvas = document.getElementById("MatrixRain");
+        const ctxt = canvas.getContext('2d');
+        ctxt.font = `${squareSize}px monospace`;
+
+        const columnCount = Math.round(canvas.width / squareSize); 
+        const lettersPosition = Array(columnCount).fill(1);
+
+
+
+        const word = "Bruno Morita";
+        const wlength = word.length;
+        
+        // Word coordinate system
+        const x0 = Math.floor(((canvas.width - wlength*squareSize)/2) /squareSize);         // Word Column (Grid Coordinate System)
+        const x1 = Math.floor(x0 + wlength-1);                                              // Word Column (Grid Coordinate System)
+        const y0 = Math.floor(canvas.height/2/squareSize);                                  // Word Row (Grid Coordinate System)        
+
+        const filledCharacters = Array(wlength).fill(false);
+        let filled = 0;
+
+        const reset = () => {
+            filledCharacters.fill(false);
+            filled = 0;
+            lettersPosition.fill(1);
+        }
+
+        const drawRain = () => {
+            if(filled === columnCount){
+                reset();
+            }
+
+
+            ctxt.fillStyle = "rgba(0,0,0, 0.07)";
+            ctxt.fillRect(0, 0, canvas.width, canvas.height);
+            ctxt.fillStyle = "#39ff14";
+
+            // render filled characters
+            filledCharacters.forEach((f , i) => f && ctxt.fillText(word[i], (x0+i)*squareSize, y0*squareSize));
+
+            // Render Randomness
+            lettersPosition.forEach((y, i ) => {
+                if(y === null){
+                    return;
+                }
+
+                const px = i*squareSize;
+                const py = y*squareSize;
+                if(x0 <= i && i <= x1 && y == y0 && Math.round(Math.random()) == 0){
+                    lettersPosition[i] = null;
+                    filledCharacters[i-x0] = true;
+                    filled++;
+                }else{
+                    const RandChar = String.fromCharCode(Math.random() * 100);
+                    ctxt.fillText(RandChar, px, py);   
+                    lettersPosition[i]++;
+                    if(py+squareSize >= canvas.height){
+                        if(filled >= wlength){
+                            lettersPosition[i] = null;
+                            filled++;
+                        }else{
+                            lettersPosition[i] = - Math.floor(Math.random()*50);
+                        }
+                    }
+                }
+            })
+        }
+
+        const animate = () => {
+            drawRain();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+    <div style="position: relative; width: 500px; height: 500px;">
+        <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000;"></canvas>
+            <a href="index.html">
+                <button style=" padding: 10px 80px; position: absolute; top: 400px; left: 600px; z-index: 10;">
+                    Enter
+                </button>
+            </a>
+    </div>
+
 </body>
 </html>
