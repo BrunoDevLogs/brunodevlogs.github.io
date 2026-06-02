@@ -8,22 +8,104 @@
     .center-text {
       text-align: center;
     }
+
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .fixed-size-image {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 80px;
+    }
+
+    img {
+      background-color: transparent !important;
+      width: 150%;
+      height: 150%;
+    }
+
+    .div1 {
+      text-align: center;
+      width: 200px;
+      height: 200px;
+    }
+
+    /* Container holds both columns side by side */
+    .page-container {
+      display: flex;         /* Activates layout engine */
+      flex-direction: row;   /* Places elements horizontally */
+      min-height: 100vh;     /* Spans full browser height */
+    }
+
+    /* Pillar sidebar styling */
+    .side-pillar {
+      width: 250px;          /* Define fixed width for the pillar */
+      flex-shrink: 0;        /* Prevents the image from squishing */
+    }
+
+    /* Forces the image to fill the side pillar perfectly */
+    .side-pillar img {
+      width: 50%;
+      height: 50%;
+      object-fit: cover;     /* Crops nicely without stretching */
+      display: block;
+    }
+
+    /* Main website text block */
+    .main-content {
+      flex-grow: 1;          /* Takes up remaining horizontal space */
+      padding: 20px;         /* Adds breathing room for text */
+    }
+
+    /* Responsive adjustment for mobile screens */
+    @media (max-width: 768px) {
+      .page-container {
+        flex-direction: column; /* Stacks image on top of text on mobile */
+      }
+      .side-pillar {
+        width: 100%;
+        height: 200px;       /* Shorter banner look on mobile devices */
+      }
+    }
+
   </style>
 </head>
-<body class="center-text" style="background-color: black;">
-  <h1 style="color: green;">Bruno Morita</h1>
-  <a href="home.html">English</a>
-  <a href="jpn.html">Japanese</a>
-  <p style="color: greenyellow;">I'm a polyglot, programmer and musician.</p>
-  <a href="web/"><button>Game Boy Game</button></a>
-  <a href="music.html"><button>Piano Music</button></a>
-  <a href="animations.html"><button>Short Animation</button></a>
-  <p style="color: brown;">Social Media</p>
-  <a href="contactme.html"><button>Contact Me</button></a><br>
-  <a href="https://www.instagram.com/bruno_011235/">Instagram</a>
-  <a href="https://www.youtube.com/@bruno_11235">YouTube</a>
-  <a href="https://brunomorita.itch.io/">Itch.io</a>
-  <a href="https://www.linkedin.com/in/bruno-morita-127877402/">LinkedIn</a>
-  <a href="https://github.com/BrunoDevLogs">GitHub</a>
+<body class="page-container" style="background-color: black;">
+  <div class="page-container">
+    <aside class="side-pillar">
+      <img src="pillar.png" alt="pillar">
+    </aside>
+  </div>
+  <div class="div1">
+    <h1 style="color: green;">Bruno Morita</h1>
+    <a href="home.html">English</a>
+    <a href="jpn.html">Japanese</a>
+    <p style="color: greenyellow;">I'm a polyglot, programmer and musician.</p>
+    <a href="web/"><button>Game Boy Game</button></a>
+    <a href="music.html"><button>Piano Music</button></a>
+    <a href="animations.html"><button>Short Animation</button></a>
+  </div>
+  <div class="page-container">
+    <aside class="side-pillar">
+      <img src="pillar.png" alt="pillar">
+    </aside>
+  </div>
+  <div class="bottom">
+    <p style="color: brown;">Social Media</p>
+    <a href="contactme.html"><button>Contact Me</button></a><br>
+    <a href="https://www.instagram.com/bruno_011235/">Instagram</a>
+    <a href="https://www.youtube.com/@bruno_11235">YouTube</a>
+    <a href="https://brunomorita.itch.io/">Itch.io</a>
+    <a href="https://www.linkedin.com/in/bruno-morita-127877402/">LinkedIn</a>
+    <a href="https://github.com/BrunoDevLogs">GitHub</a>
+  </div>
 </body>
 </html>
