@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bruno Morita</title>
+    <title>森田</title>
 
     <style>
         #MatrixRain{
@@ -18,19 +18,17 @@
 
 </head>
 <body>
-    <div>
-        <canvas id="MatrixRain" width="900" height="600"></canvas>
-            <a href="html/home.html">
+    <canvas id="MatrixRain" width="900" height="600"></canvas>
+    <a href="html/jpn.html">
                 <button style=" padding: 10px 80px; position: absolute; top: 55%; left: 42%; z-index: 10;">
-                    Enter
+                    開始
                 </button>
             </a>
-            <a href="japan.html">
+            <a href="index.html">
                 <button style=" padding: 10px 15px; position: absolute; top: 35%; left: 38%; z-index: 10;">
-                    🔴
+                    🇺🇸English
                 </button>
             </a>
-    </div>
     <script>
         const squareSize = 20; 
         const canvas = document.getElementById("MatrixRain");
@@ -40,9 +38,7 @@
         const columnCount = Math.round(canvas.width / squareSize); 
         const lettersPosition = Array(columnCount).fill(1);
 
-
-
-        const word = "Bruno Morita";
+        const word = "モリタ・ブルーノ";
         const wlength = word.length;
         
         // Word coordinate system
@@ -67,7 +63,7 @@
 
             ctxt.fillStyle = "rgba(0,0,0, 0.07)";
             ctxt.fillRect(0, 0, canvas.width, canvas.height);
-            ctxt.fillStyle = "#39ff14";
+            ctxt.fillStyle = "#FF0038";
 
             // render filled characters
             filledCharacters.forEach((f , i) => f && ctxt.fillText(word[i], (x0+i)*squareSize, y0*squareSize));
@@ -85,7 +81,7 @@
                     filledCharacters[i-x0] = true;
                     filled++;
                 }else{
-                    const RandChar = String.fromCharCode(Math.random() * 100);
+                    const RandChar = String.fromCharCode(0x3040 + Math.random() * (0x309F - 0x3040 + 1));
                     ctxt.fillText(RandChar, px, py);   
                     lettersPosition[i]++;
                     if(py+squareSize >= canvas.height){
