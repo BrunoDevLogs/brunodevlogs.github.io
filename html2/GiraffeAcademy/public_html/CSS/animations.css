@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 18, 2019, 2:21:22 PM
+    Author     : root
+*/
+
+@import "style.css";
+
+@keyframes change-color {
+    from {background-color: salmon}
+    to {background-color: blue}
+}
+
+.box-animation {
+    animation-name: change-color;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}

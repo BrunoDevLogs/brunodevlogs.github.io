@@ -1,0 +1,21 @@
+#Mike {
+    color: red;
+}
+
+div {
+    background-color: green;
+}
+
+.fancy-border {
+    border: 3px dashed red;
+}
+
+.blue-text {
+    color: blue;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
